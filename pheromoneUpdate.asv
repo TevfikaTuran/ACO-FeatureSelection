@@ -1,0 +1,26 @@
+%--------------------------------------------------------------------------
+%function tau = pheromoneUpdate(tour,rho,tau, bestFit)
+%--------------------------------------------------------------------------
+%çıkış parametreleri
+%--------------------------------------------------------------------------
+%%tau: feromon miktarı
+%--------------------------------------------------------------------------
+%giriş parametreleri
+%--------------------------------------------------------------------------
+%tour: 
+%tau: feromon miktarı
+%alpha:feromon ağırlıklarını ayarlama faktörü
+%eta:sezgisel parametre
+%beta:eta ağırlıklarını ayarlama faktörü
+%--------------------------------------------------------------------------              
+%Txy^(i+1)= (1-ρ)Txy^i + ∑(ΔTxy^k)
+%-------------------------------------------------------------------------- 
+function tau = pheromoneUpdate(tour,rho,tau, bestFit)
+
+%tüm rotanın adımları gezilip feromon miktarları güncelleniyor
+for step = 1:length(tour)-1
+    startloc = tour(step); %başlangıç noktası belirleniyor
+    stoploc = tour(step+1);%bitiş noktası belirleniyor
+    Dtau = 1/bestFit;
+    tau(startloc,stoploc) = (1-rho)*tau(startloc,stoploc)+ Dtau;
+end
