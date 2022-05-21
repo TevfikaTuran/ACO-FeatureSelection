@@ -30,7 +30,7 @@ bestFit = inf;              %en iyi uygunluk değeri.
 [sfeatindex , sfeat, fitnes] = ACOFeatureSelection(X,y,dim,n_ant,...
     n_feat,bestFit,tau, alpha,eta, beta, rho, numFolds, maxiter);
 
-%% Sonuçların görseslleştirilmesi
+%% Sonuçların görselleştirilmesi
 plot(1:maxiter,fitnes)
 xlabel('Number of Iteration');
 ylabel('Fitness Value');
