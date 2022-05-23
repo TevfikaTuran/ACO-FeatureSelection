@@ -26,7 +26,7 @@
 %--------------------------------------------------------------------------
 
 function [sfeatindex , sfeat, fitnes] = ACOFeatureSelection(X,y,dim,n_ant,...
-    n_feat,bestFit,tau, alpha,eta, beta, rho,numFolds, maxiter) 
+    n_feat,bestFit,tau, alpha,eta, beta, rho,numFolds,numExperiments,mdl_type, maxiter) 
 
 fit = zeros(1,n_ant); %güncellenen fitnes değerlerini tutmak için matris oluştururuz.
 fitnes = [];%her iterasyondaki en iyi fitnes değerini tutmak için boş matris oluşturuyoruz.
@@ -40,7 +40,7 @@ while (1) %ana döngü
     %seçilen öznitliklerin uygunluk değeri hesaplanıp önceki uygunluk
     %değerleri ile karşılaştırılır.
     for i = 1: n_ant 
-        fit(i) = objfunction(X,y,featindex,numFolds);
+        fit(i) = objfunction(X,y,featindex,numFolds,numExperiments,mdl_type);
 
         if fit(i) < bestFit
            bestfeat = featindex(i,:);

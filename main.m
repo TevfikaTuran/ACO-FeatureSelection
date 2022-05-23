@@ -7,16 +7,21 @@
 %--------------------------------------------------------------------------
 %% PARAMETRELERİN BELİRLENMESİ
 clear,clc;
-load Healty_Endometrial.mat; %veri setimizi yüklüyoruz.
-numFolds = 5; %cross-validation için fold sayısı.
+load Healty_Endometrial.mat;     %veri setimizi yüklüyoruz.
+% load FreshMeat.mat;
+% X = X';
+% y= t;
+numFolds = 4;                    %cross-validation için fold sayısı.
+numExperiments = 1;
+mdl_type ='knn';
 
-n_ant = 10;              %karınca sayısı
-n_feat = 15;             %seçilecek öznitelik sayısı.
-maxiter = 100;            %maksimum iterasyın
-tau = 1;                 %EKSİK
-eta = 1;
-alpha = 1;
-beta = 1;
+n_ant = 10;                %karınca sayısı
+n_feat = 35;                %seçilecek öznitelik sayısı.
+maxiter = 100;             %maksimum iterasyın
+tau = 1;                   % feromon miktarı
+eta = 1;                   % sezgisel
+alpha = 0.2;
+beta = 0.2;
 rho = 0.5;
 
 dim = size(X,2);            %Veri setinden öznitelik sayısını çekiyoruz.
@@ -28,9 +33,10 @@ bestFit = inf;              %en iyi uygunluk değeri.
 %% ACO Algoritmasının çalışması
 
 [sfeatindex , sfeat, fitnes] = ACOFeatureSelection(X,y,dim,n_ant,...
-    n_feat,bestFit,tau, alpha,eta, beta, rho, numFolds, maxiter);
+    n_feat,bestFit,tau, alpha,eta, beta, rho,numFolds,...
+    numExperiments,mdl_type, maxiter);
 
-%% Sonuçların görselleştirilmesi
+%% Sonuçların görseslleştirilmesi
 plot(1:maxiter,fitnes)
 xlabel('Number of Iteration');
 ylabel('Fitness Value');

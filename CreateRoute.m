@@ -24,12 +24,14 @@ for ant = 1: n_ant                    %karıncaları hareket ettiren döngü.
     featx(ant,1) = randi([1, dim]);   %karıncaların başlangıç konumları random belirlenir.
     pathx = [];                       %karıncalarının gittiği yolların tutulması için boş matris oluşturulur.
     
-    for step = 2:n_feat %karıncaların rotaları belirleniyor
+    for step = 2:n_feat               %karıncaların rotaları belirleniyor
         pathx = [pathx(1:end), featx(ant,step-1)];      %karıncaların konumları path matrisine kaydediliyor.
-        prob = probability(path, tau,alpha, eta, beta);%konumların skorlarına göre seçilme olasılıkları
+        prob = probability(pathx, tau,alpha, eta, beta);%konumların skorlarına göre seçilme olasılıkları
                                                         %hesaplanıyor.
-        route = rouletteSelection(prob);                %bir sonraki konum rastgele seçilir.
-        featindex(ant,step-1) = route;                  %seçilen konumlar rota matrisine eklenir.
+        path_step = rouletteSelection(prob);                %bir sonraki konum rastgele seçilir.
+        featx(ant,step) = path_step;                  %seçilen konumlar rota matrisine eklenir.
+        featindex = featx;
     end%for
+
 end %for
 end %function
