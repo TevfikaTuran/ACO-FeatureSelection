@@ -14,13 +14,11 @@
 %--------------------------------------------------------------------------
 
 %Seçilen özniteliklerin uygunluk değerleri belirlenir.
-function fit = objfunction(X,y,feat,numFolds,numExperiments,mdl_type)
+function fit = objfunction(X,y,feat,numFolds,mdl_type)
 
 %sadece seçilen öznitelikler ile eğitim yapılarak doğruluk değerleri
 %hesaplanır
 cost = mdl_classifier( X(:,feat),y,numFolds,mdl_type);
-% cost = classifier( X(:,feat),y,numFolds,mdl_type); % Sıkıntılı
-% cost = DoAllExperiments(X(:,feat), y, numExperiments, numFolds, mdl_type);
 
 % fit = -log(cost);
 fit = 1-cost; %1- acuuracy ile hatayı buluruz (amacımız hatayı minimize etmek)

@@ -8,15 +8,12 @@
 %% PARAMETRELERİN BELİRLENMESİ
 clear,clc;
 load Healty_Endometrial.mat;     %veri setimizi yüklüyoruz.
-% load FreshMeat.mat;
-% X = X';
-% y= t;
+
 numFolds = 4;                    %cross-validation için fold sayısı.
-numExperiments = 1;
 mdl_type ='knn';
 
 n_ant = 10;                %karınca sayısı
-n_feat = 35;                %seçilecek öznitelik sayısı.
+n_feat = 15;               %seçilecek öznitelik sayısı.
 maxiter = 100;             %maksimum iterasyın
 tau = 1;                   % feromon miktarı
 eta = 1;                   % sezgisel
@@ -34,7 +31,7 @@ bestFit = inf;              %en iyi uygunluk değeri.
 
 [sfeatindex , sfeat, fitnes] = ACOFeatureSelection(X,y,dim,n_ant,...
     n_feat,bestFit,tau, alpha,eta, beta, rho,numFolds,...
-    numExperiments,mdl_type, maxiter);
+    mdl_type, maxiter);
 
 %% Sonuçların görseslleştirilmesi
 plot(1:maxiter,fitnes)
